@@ -212,7 +212,7 @@ function App() {
             </p>
             
             {/* Scarcity Reminder */}
-            <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug">
+            <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
               <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="neon-highlight-countdown">{timeLeft.days} days</span> until GTA VI launches!
             </p>
             

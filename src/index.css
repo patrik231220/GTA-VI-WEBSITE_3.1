@@ -78,109 +78,126 @@ body {
 
 /* Neon Highlight Effects for Persuasive Copy */
 .neon-highlight-primary {
-  color: #FF3CAC;
+  color: #FF69B4;
   text-shadow: 
-    0 0 5px #FF3CAC,
-    0 0 10px #FF3CAC,
-    0 0 15px #FF3CAC,
-    0 0 20px #FF3CAC;
+    0 0 3px rgba(255, 105, 180, 0.8),
+    0 0 6px rgba(255, 105, 180, 0.6),
+    0 0 9px rgba(255, 105, 180, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 900;
   letter-spacing: 0.05em;
+  animation: colorWave 4s ease-in-out infinite;
 }
 
 .neon-highlight-secondary {
-  color: #00FFFF;
+  color: #40E0D0;
   text-shadow: 
-    0 0 5px #00FFFF,
-    0 0 10px #00FFFF,
-    0 0 15px #00FFFF;
+    0 0 3px rgba(64, 224, 208, 0.8),
+    0 0 6px rgba(64, 224, 208, 0.6),
+    0 0 9px rgba(64, 224, 208, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 700;
   text-decoration: underline;
-  text-decoration-color: #00FFFF;
+  text-decoration-color: #40E0D0;
+  animation: colorWave 4s ease-in-out infinite 0.5s;
 }
 
 .neon-highlight-accent {
-  color: #FFD700;
+  color: #FFA500;
   text-shadow: 
-    0 0 5px #FFD700,
-    0 0 10px #FFD700,
-    0 0 15px #FFD700;
+    0 0 3px rgba(255, 165, 0, 0.8),
+    0 0 6px rgba(255, 165, 0, 0.6),
+    0 0 9px rgba(255, 165, 0, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  animation: colorWave 4s ease-in-out infinite 1s;
 }
 
 .neon-highlight-gold {
-  color: #FFA500;
+  color: #DAA520;
   text-shadow: 
-    0 0 5px #FFA500,
-    0 0 10px #FFA500,
-    0 0 15px #FFA500;
+    0 0 3px rgba(218, 165, 32, 0.8),
+    0 0 6px rgba(218, 165, 32, 0.6),
+    0 0 9px rgba(218, 165, 32, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-style: italic;
   font-weight: 600;
+  animation: colorWave 4s ease-in-out infinite 1.5s;
 }
 
 .neon-highlight-urgent {
-  color: #FF0080;
+  color: #FF1493;
   text-shadow: 
-    0 0 5px #FF0080,
-    0 0 10px #FF0080,
-    0 0 15px #FF0080,
-    0 0 20px #FF0080;
+    0 0 3px rgba(255, 20, 147, 0.8),
+    0 0 6px rgba(255, 20, 147, 0.6),
+    0 0 9px rgba(255, 20, 147, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  animation: urgentPulse 2s ease-in-out infinite;
+  animation: colorWave 3s ease-in-out infinite, urgentPulse 2s ease-in-out infinite;
 }
 
 .neon-highlight-scarcity {
-  color: #FF4500;
+  color: #FF6347;
   text-shadow: 
-    0 0 5px #FF4500,
-    0 0 10px #FF4500,
-    0 0 15px #FF4500;
+    0 0 3px rgba(255, 99, 71, 0.8),
+    0 0 6px rgba(255, 99, 71, 0.6),
+    0 0 9px rgba(255, 99, 71, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  animation: colorWave 4s ease-in-out infinite 2s;
 }
 
 .neon-highlight-warning {
-  color: #FFFF00;
+  color: #FFD700;
   text-shadow: 
-    0 0 5px #FFFF00,
-    0 0 10px #FFFF00,
-    0 0 15px #FFFF00;
+    0 0 3px rgba(255, 215, 0, 0.8),
+    0 0 6px rgba(255, 215, 0, 0.6),
+    0 0 9px rgba(255, 215, 0, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  animation: colorWave 4s ease-in-out infinite 2.5s;
 }
 
 .neon-highlight-countdown {
-  color: #00FF00;
+  color: #32CD32;
   text-shadow: 
-    0 0 5px #00FF00,
-    0 0 10px #00FF00,
-    0 0 15px #00FF00,
-    0 0 20px #00FF00;
+    0 0 3px rgba(50, 205, 50, 0.8),
+    0 0 6px rgba(50, 205, 50, 0.6),
+    0 0 9px rgba(50, 205, 50, 0.4),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
   font-weight: 900;
   font-size: 1.1em;
-  animation: countdownGlow 3s ease-in-out infinite;
+  animation: colorWave 3s ease-in-out infinite, countdownGlow 3s ease-in-out infinite;
+}
+
+/* Color Wave Animation */
+@keyframes colorWave {
+  0%, 100% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    filter: hue-rotate(15deg) brightness(1.1);
+  }
+  50% {
+    filter: hue-rotate(30deg) brightness(1.2);
+  }
+  75% {
+    filter: hue-rotate(15deg) brightness(1.1);
+  }
 }
 
 /* Urgent Pulse Animation */
 @keyframes urgentPulse {
   0%, 100% {
-    text-shadow: 
-      0 0 5px #FF0080,
-      0 0 10px #FF0080,
-      0 0 15px #FF0080,
-      0 0 20px #FF0080;
     transform: scale(1);
   }
   50% {
-    text-shadow: 
-      0 0 8px #FF0080,
-      0 0 16px #FF0080,
-      0 0 24px #FF0080,
-      0 0 32px #FF0080;
     transform: scale(1.02);
   }
 }
@@ -188,19 +205,10 @@ body {
 /* Countdown Glow Animation */
 @keyframes countdownGlow {
   0%, 100% {
-    text-shadow: 
-      0 0 5px #00FF00,
-      0 0 10px #00FF00,
-      0 0 15px #00FF00,
-      0 0 20px #00FF00;
+    opacity: 1;
   }
   50% {
-    text-shadow: 
-      0 0 8px #00FF00,
-      0 0 16px #00FF00,
-      0 0 24px #00FF00,
-      0 0 32px #00FF00,
-      0 0 40px #00FF00;
+    opacity: 0.8;
   }
 }
 /* Custom animations and effects */
