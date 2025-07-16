@@ -153,11 +153,11 @@ function App() {
           </h2>
 
           {/* Subheading */}
-          <h3 className="text-lg md:text-xl lg:text-2xl gta-body leading-snug mb-6" style={{ 
+          <h3 className="text-base md:text-lg lg:text-xl gta-body leading-tight mb-6 -mt-2" style={{ 
             color: '#FFFFFF', 
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.9)'
           }}>
-            The <span className="neon-highlight-accent font-bold">PREMIUM</span> Collector's Item for <em className="neon-highlight-gold">True GTA Fans</em>
+            The <span className="neon-highlight-secondary font-bold">PREMIUM</span> Collector's Item for <span className="neon-highlight-primary underline decoration-pink-400">True GTA Fans</span>
           </h3>
 
           {/* Action Buttons */}
@@ -188,7 +188,7 @@ function App() {
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      <span className="neon-highlight-urgent">CLAIM</span> Your Clock <span className="neon-highlight-urgent">NOW</span> →
+                      CLAIM Your Clock NOW →
                     </>
                   )}
                 </button>
@@ -208,12 +208,14 @@ function App() {
           {/* Bottom Text */}
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-base md:text-lg text-white gta-body enhanced-text-visibility leading-relaxed">
-              Be among the <span className="neon-highlight-scarcity font-bold">first 300 fans</span> to secure your <span className="neon-highlight-primary">exclusive GTA VI</span> collector's countdown clock. Reserve your <em className="neon-highlight-gold">piece of gaming history</em> now!
+              Be among the <span className="neon-highlight-primary font-bold underline decoration-pink-400">first 300 fans</span> to secure your <span className="neon-highlight-secondary">exclusive GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
             </p>
             
             {/* Scarcity Reminder */}
             <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
-              <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="neon-highlight-countdown">{timeLeft.days} days</span> until GTA VI launches!
+              <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="text-red-400 font-bold" style={{ 
+                textShadow: '0 0 8px rgba(239, 68, 68, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8)'
+              }}>{timeLeft.days} days</span> until GTA VI launches!
             </p>
             
             {/* Trust Indicators */}
