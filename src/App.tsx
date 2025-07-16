@@ -181,7 +181,7 @@ function App() {
                 {/* Secure Button */}
                 <button
                   onClick={handleSecureSubmit}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !email.trim()}
                   className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white gta-cta py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation"
                 >
                   {isSubmitting ? (
