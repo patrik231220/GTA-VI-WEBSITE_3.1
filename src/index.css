@@ -73,7 +73,135 @@ body {
 .gta-secondary {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.3;
+}
+
+/* Neon Highlight Effects for Persuasive Copy */
+.neon-highlight-primary {
+  color: #FF3CAC;
+  text-shadow: 
+    0 0 5px #FF3CAC,
+    0 0 10px #FF3CAC,
+    0 0 15px #FF3CAC,
+    0 0 20px #FF3CAC;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.neon-highlight-secondary {
+  color: #00FFFF;
+  text-shadow: 
+    0 0 5px #00FFFF,
+    0 0 10px #00FFFF,
+    0 0 15px #00FFFF;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #00FFFF;
+}
+
+.neon-highlight-accent {
+  color: #FFD700;
+  text-shadow: 
+    0 0 5px #FFD700,
+    0 0 10px #FFD700,
+    0 0 15px #FFD700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.neon-highlight-gold {
+  color: #FFA500;
+  text-shadow: 
+    0 0 5px #FFA500,
+    0 0 10px #FFA500,
+    0 0 15px #FFA500;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.neon-highlight-urgent {
+  color: #FF0080;
+  text-shadow: 
+    0 0 5px #FF0080,
+    0 0 10px #FF0080,
+    0 0 15px #FF0080,
+    0 0 20px #FF0080;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  animation: urgentPulse 2s ease-in-out infinite;
+}
+
+.neon-highlight-scarcity {
+  color: #FF4500;
+  text-shadow: 
+    0 0 5px #FF4500,
+    0 0 10px #FF4500,
+    0 0 15px #FF4500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.neon-highlight-warning {
+  color: #FFFF00;
+  text-shadow: 
+    0 0 5px #FFFF00,
+    0 0 10px #FFFF00,
+    0 0 15px #FFFF00;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.neon-highlight-countdown {
+  color: #00FF00;
+  text-shadow: 
+    0 0 5px #00FF00,
+    0 0 10px #00FF00,
+    0 0 15px #00FF00,
+    0 0 20px #00FF00;
+  font-weight: 900;
+  font-size: 1.1em;
+  animation: countdownGlow 3s ease-in-out infinite;
+}
+
+/* Urgent Pulse Animation */
+@keyframes urgentPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #FF0080,
+      0 0 10px #FF0080,
+      0 0 15px #FF0080,
+      0 0 20px #FF0080;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 
+      0 0 8px #FF0080,
+      0 0 16px #FF0080,
+      0 0 24px #FF0080,
+      0 0 32px #FF0080;
+    transform: scale(1.02);
+  }
+}
+
+/* Countdown Glow Animation */
+@keyframes countdownGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #00FF00,
+      0 0 10px #00FF00,
+      0 0 15px #00FF00,
+      0 0 20px #00FF00;
+  }
+  50% {
+    text-shadow: 
+      0 0 8px #00FF00,
+      0 0 16px #00FF00,
+      0 0 24px #00FF00,
+      0 0 32px #00FF00,
+      0 0 40px #00FF00;
+  }
 }
 /* Custom animations and effects */
 @keyframes fadeInUp {

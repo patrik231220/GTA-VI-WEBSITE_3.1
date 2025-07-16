@@ -149,15 +149,15 @@ function App() {
             color: '#FFFFFF', 
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.9)'
           }}>
-            Exclusive GTA VI Countdown Clock
+            <span className="neon-highlight-primary">EXCLUSIVE</span> GTA VI <span className="neon-highlight-secondary">Countdown Clock</span>
           </h2>
 
           {/* Subheading */}
-          <h3 className="text-lg md:text-xl lg:text-2xl gta-body leading-tight mb-8" style={{ 
+          <h3 className="text-lg md:text-xl lg:text-2xl gta-body leading-snug mb-6" style={{ 
             color: '#FFFFFF', 
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.9)'
           }}>
-            The Premium Collector's Item for True GTA Fans
+            The <span className="neon-highlight-accent font-bold">PREMIUM</span> Collector's Item for <em className="neon-highlight-gold">True GTA Fans</em>
           </h3>
 
           {/* Action Buttons */}
@@ -172,7 +172,7 @@ function App() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email to reserve priority access"
+                    placeholder="Enter your email to reserve PRIORITY ACCESS"
                     required
                     className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center font-medium"
                   />
@@ -188,7 +188,7 @@ function App() {
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      Claim Your Clock Now →
+                      <span className="neon-highlight-urgent">CLAIM</span> Your Clock <span className="neon-highlight-urgent">NOW</span> →
                     </>
                   )}
                 </button>
@@ -196,8 +196,8 @@ function App() {
             ) : (
               <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-6 text-center">
                 <Check className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                <h3 className="text-xl gta-subtitle text-white mb-2 enhanced-text-visibility">You're In!</h3>
-                <p className="text-white gta-body enhanced-text-visibility">
+                <h3 className="text-xl gta-subtitle text-white mb-2 enhanced-text-visibility leading-tight">You're In!</h3>
+                <p className="text-white gta-body enhanced-text-visibility leading-relaxed">
                   Welcome to the exclusive pre-order list. We'll notify you when the GTA VI Countdown Clock becomes available.
                 </p>
               </div>
@@ -207,18 +207,18 @@ function App() {
 
           {/* Bottom Text */}
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-base md:text-lg text-white gta-body enhanced-text-visibility">
-              Be among the first 300 fans to secure your exclusive GTA VI collector's countdown clock. Reserve your piece of gaming history now!
+            <p className="text-base md:text-lg text-white gta-body enhanced-text-visibility leading-relaxed">
+              Be among the <span className="neon-highlight-scarcity font-bold">first 300 fans</span> to secure your <span className="neon-highlight-primary">exclusive GTA VI</span> collector's countdown clock. Reserve your <em className="neon-highlight-gold">piece of gaming history</em> now!
             </p>
             
             {/* Scarcity Reminder */}
-            <p className="text-lg md:text-xl text-yellow-300 font-bold gta-subtitle enhanced-text-visibility mt-4 mb-6">
-              Limited availability – just {timeLeft.days} days until GTA VI launches!
+            <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug">
+              <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="neon-highlight-countdown">{timeLeft.days} days</span> until GTA VI launches!
             </p>
             
             {/* Trust Indicators */}
             <div className="text-center">
-              <p className="text-sm text-white gta-secondary enhanced-text-visibility">
+              <p className="text-sm text-white gta-secondary enhanced-text-visibility leading-normal">
                 Premium Quality • Limited Edition • Worldwide Shipping • Satisfaction Guaranteed
               </p>
             </div>
