@@ -208,13 +208,15 @@ function App() {
           {/* Bottom Text */}
           <div className="text-center max-w-3xl mx-auto">
             <p className="text-base md:text-lg text-white gta-body enhanced-text-visibility leading-relaxed">
-              Be among the <span className="neon-highlight-primary font-bold underline decoration-pink-400">first 300 fans</span> to secure your <span className="neon-highlight-secondary">exclusive GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
+              Be among the <span className="neon-highlight-primary font-bold underline decoration-pink-400">FIRST 300 FANS</span> to secure your <span className="neon-highlight-secondary">EXCLUSIVE GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
             </p>
             
             {/* Scarcity Reminder */}
             <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
-              <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="text-red-400 font-bold" style={{ 
-                textShadow: '0 0 8px rgba(239, 68, 68, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8)'
+              <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="font-pixel digit-glow pixel-perfect" style={{ 
+                color: '#FF0000',
+                imageRendering: 'pixelated',
+                textRendering: 'geometricPrecision'
               }}>{timeLeft.days} days</span> until GTA VI launches!
             </p>
             
