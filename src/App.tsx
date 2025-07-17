@@ -26,6 +26,7 @@ function App() {
   });
   
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -167,10 +168,18 @@ function App() {
                 {/* Email Input Form */}
                 <form onSubmit={handleEmailSubmit} className="space-y-4">
                   <input
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Enter your first name"
+                    required
+                    className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
+                  />
+                  <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email to reserve priority access"
+                    placeholder="Enter your email address"
                     required
                     className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
                   />
@@ -179,7 +188,7 @@ function App() {
                 {/* Secure Button */}
                 <button
                   onClick={handleSecureSubmit}
-                  disabled={isSubmitting || !email.trim()}
+                  disabled={isSubmitting || !email.trim() || !firstName.trim()}
                   className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation text-sm md:text-base lg:text-lg font-bold"
                 >
                   {isSubmitting ? (
