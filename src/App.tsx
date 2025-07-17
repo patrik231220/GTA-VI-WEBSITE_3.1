@@ -145,7 +145,7 @@ function App() {
           </div>
 
           {/* Subtitle */}
-          <h2 className="text-2xl md:text-3xl lg:text-4xl gta-subtitle leading-tight mb-4" style={{ 
+          <h2 className="text-xl md:text-2xl lg:text-3xl gta-subtitle leading-tight mb-3" style={{ 
             color: '#FFFFFF', 
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.9)'
           }}>
@@ -153,11 +153,11 @@ function App() {
           </h2>
 
           {/* Subheading */}
-          <h3 className="text-base md:text-lg lg:text-xl gta-body leading-tight mb-6 -mt-2" style={{ 
+          <h3 className="text-sm md:text-base lg:text-lg gta-body leading-snug mb-4 -mt-1" style={{ 
             color: '#FFFFFF', 
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.9)'
           }}>
-            The <span className="neon-highlight-secondary font-bold">PREMIUM</span> Collector's Item for <span className="neon-highlight-primary underline decoration-pink-400">True GTA Fans</span>
+            The <span className="neon-highlight-secondary">PREMIUM</span> Collector's Item for <span className="neon-highlight-primary">True GTA Fans</span>
           </h3>
 
           {/* Action Buttons */}
@@ -172,9 +172,9 @@ function App() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email to reserve PRIORITY ACCESS"
+                    placeholder="Enter your email to reserve priority access"
                     required
-                    className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center font-medium"
+                    className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base"
                   />
                 </form>
                 
@@ -182,13 +182,13 @@ function App() {
                 <button
                   onClick={handleSecureSubmit}
                   disabled={isSubmitting || !email.trim()}
-                  className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white gta-cta py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation"
+                  className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white gta-cta py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation text-sm md:text-base lg:text-lg font-bold"
                 >
                   {isSubmitting ? (
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      CLAIM Your Clock NOW →
+                      CLAIM YOUR CLOCK NOW →
                     </>
                   )}
                 </button>
@@ -196,8 +196,8 @@ function App() {
             ) : (
               <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-6 text-center">
                 <Check className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                <h3 className="text-xl gta-subtitle text-white mb-2 enhanced-text-visibility leading-tight">You're In!</h3>
-                <p className="text-white gta-body enhanced-text-visibility leading-relaxed">
+                <h3 className="text-lg md:text-xl gta-subtitle text-white mb-2 enhanced-text-visibility leading-tight">You're In!</h3>
+                <p className="text-sm md:text-base text-white gta-body enhanced-text-visibility leading-relaxed">
                   Welcome to the exclusive pre-order list. We'll notify you when the GTA VI Countdown Clock becomes available.
                 </p>
               </div>
@@ -207,12 +207,12 @@ function App() {
 
           {/* Bottom Text */}
           <div className="text-center max-w-3xl mx-auto">
-            <p className="text-base md:text-lg text-white gta-body enhanced-text-visibility leading-relaxed">
-              Be among the <span className="neon-highlight-primary font-bold underline decoration-pink-400">FIRST 300 FANS</span> to secure your <span className="neon-highlight-secondary">EXCLUSIVE GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
+            <p className="text-sm md:text-base lg:text-lg text-white gta-body enhanced-text-visibility leading-relaxed">
+              Be among the <span className="neon-highlight-primary">FIRST 300 FANS</span> to secure your <span className="neon-highlight-secondary">EXCLUSIVE GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
             </p>
             
             {/* Scarcity Reminder */}
-            <p className="text-lg md:text-xl font-bold gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
+            <p className="text-base md:text-lg lg:text-xl gta-subtitle enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
               <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="font-pixel digit-glow pixel-perfect" style={{ 
                 color: '#FF0000',
                 imageRendering: 'pixelated',
@@ -222,7 +222,7 @@ function App() {
             
             {/* Trust Indicators */}
             <div className="text-center">
-              <p className="text-sm text-white gta-secondary enhanced-text-visibility leading-normal">
+              <p className="text-xs md:text-sm text-white gta-secondary enhanced-text-visibility leading-normal opacity-90">
                 Premium Quality • Limited Edition • Worldwide Shipping • Satisfaction Guaranteed
               </p>
             </div>
