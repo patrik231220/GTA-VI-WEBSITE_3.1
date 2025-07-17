@@ -166,7 +166,7 @@ function App() {
             {!isSubmitted ? (
               <>
                 {/* Email Input Form */}
-                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <form onSubmit={handleEmailSubmit} className="space-y-3">
                   <input
                     type="text"
                     value={firstName}
@@ -183,14 +183,13 @@ function App() {
                     required
                     className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
                   />
-                </form>
                 
-                {/* Secure Button */}
-                <button
+                  {/* Secure Button */}
+                  <button
                   onClick={handleSecureSubmit}
                   disabled={isSubmitting || !email.trim() || !firstName.trim()}
                   className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation text-sm md:text-base lg:text-lg font-bold"
-                >
+                  >
                   {isSubmitting ? (
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
@@ -198,7 +197,8 @@ function App() {
                       CLAIM YOUR CLOCK NOW →
                     </>
                   )}
-                </button>
+                  </button>
+                </form>
               </>
             ) : (
               <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-6 text-center">
