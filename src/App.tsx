@@ -199,6 +199,15 @@ function App() {
                   )}
                   </button>
                 </form>
+                
+                {/* Error Message */}
+                {submitError && (
+                  <div className="bg-red-500/30 backdrop-blur-sm border border-red-400/40 rounded-lg p-4 text-center mt-3">
+                    <p className="text-sm text-white enhanced-text-visibility">
+                      {submitError}
+                    </p>
+                  </div>
+                )}
               </>
             ) : (
               <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-6 text-center">
