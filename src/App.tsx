@@ -29,6 +29,7 @@ function App() {
   const [firstName, setFirstName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Calculate time until Tuesday, May 26 at 12:00 AM GMT+2
   useEffect(() => {
@@ -92,12 +93,36 @@ function App() {
 
   const handleSecureSubmit = async () => {
     setIsSubmitting(true);
+    setSubmitError(null);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mailsuite-submission`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          email: email.trim()
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('MailSuite submission successful:', result);
+      
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formatNumber = (num: number) => {
