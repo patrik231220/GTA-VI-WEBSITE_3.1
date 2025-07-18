@@ -96,24 +96,31 @@ function App() {
     setSubmitError(null);
     
     try {
-      const response = await fetch("https://nmckdwkyjnkwnhbxsesv.supabase.co/functions/v1/super-service", {
+      // MailerLite API endpoint for adding subscribers
+      const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_MAILERLITE_API_TOKEN',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
-          firstName: firstName.trim(),
-          email: email.trim()
+          email: email.trim(),
+          fields: {
+            name: firstName.trim()
+          },
+          groups: [], // Add group IDs if you want to assign to specific groups
+          status: 'active'
         })
       });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+        throw new Error(errorData.message || errorData.error || `HTTP ${response.status}: ${response.statusText}`);
       }
 
       const result = await response.json();
-      console.log('MailSuite submission successful:', result);
+      console.log('MailerLite submission successful:', result);
       
       setIsSubmitted(true);
     } catch (error) {
