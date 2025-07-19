@@ -160,23 +160,23 @@ function App() {
 
   return (
     <BackgroundSlideshow>
-      <div className="min-h-screen flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12">
         {/* Main Content */}
-        <div className="text-center max-w-5xl mx-auto space-y-8">
+        <div className="text-center w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-5xl mx-auto space-y-6 sm:space-y-8">
           {/* Main Headline - Replace with Logo */}
-          <div className="flex items-center justify-center logo-container">
+          <div className="flex items-center justify-center logo-container mb-4 sm:mb-6">
             <img 
               src="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.png"
               alt="Grand Theft Auto VI Logo"
-              className="max-h-[20vh] w-auto object-contain"
+              className="max-h-[15vh] sm:max-h-[18vh] md:max-h-[20vh] w-auto object-contain"
               loading="eager"
               decoding="async"
             />
           </div>
 
           {/* Countdown Timer */}
-          <div className="my-12">
-            <div className="grid grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+          <div className="my-8 sm:my-10 md:my-12">
+            <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 lg:gap-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto">
               {[
                 { value: timeLeft.days, label: 'DAYS', vhs: vhsStates.days, vhsClass: 'vhs-days' },
                 { value: timeLeft.hours, label: 'HRS', vhs: vhsStates.hours, vhsClass: 'vhs-hours' },
@@ -184,8 +184,8 @@ function App() {
                 { value: timeLeft.seconds, label: 'SEC', vhs: vhsStates.seconds, vhsClass: 'vhs-seconds' }
               ].map((unit, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <div className={`countdown-digit bg-black/60 backdrop-blur-sm rounded-lg p-4 md:p-6 mb-3 border border-red-500/40 shadow-2xl ${unit.vhs ? unit.vhsClass : ''}`}>
-                    <div className="text-2xl md:text-4xl lg:text-5xl font-pixel leading-none tracking-wider transform transition-all duration-300 hover:scale-105 digit-glow pixel-perfect" style={{ 
+                  <div className={`countdown-digit bg-black/60 backdrop-blur-sm rounded-lg p-2 sm:p-3 md:p-4 lg:p-6 mb-2 sm:mb-3 border border-red-500/40 shadow-2xl w-full aspect-square flex items-center justify-center ${unit.vhs ? unit.vhsClass : ''}`}>
+                    <div className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-pixel leading-none tracking-wider transform transition-all duration-300 hover:scale-105 digit-glow pixel-perfect" style={{ 
                       color: '#FF0000',
                       imageRendering: 'pixelated',
                       textRendering: 'geometricPrecision'
@@ -193,7 +193,7 @@ function App() {
                       {formatNumber(unit.value)}
                     </div>
                   </div>
-                  <div className="text-sm md:text-base font-semibold text-white tracking-widest enhanced-text-visibility">
+                  <div className="text-xs sm:text-sm md:text-base font-semibold text-white tracking-widest enhanced-text-visibility">
                     {unit.label}
                   </div>
                 </div>
@@ -202,27 +202,27 @@ function App() {
           </div>
 
           {/* Subtitle */}
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-3 enhanced-text-visibility" style={{ 
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight mb-3 sm:mb-4 enhanced-text-visibility px-2" style={{ 
             color: '#FFFFFF'
           }}>
             <span className="neon-highlight-primary">EXCLUSIVE</span> GTA VI <span className="neon-highlight-secondary">Countdown Clock</span>
           </h2>
 
           {/* Subheading */}
-          <h3 className="text-sm md:text-base lg:text-lg leading-snug mb-4 -mt-1 enhanced-text-visibility" style={{ 
+          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl leading-snug mb-4 sm:mb-6 -mt-1 enhanced-text-visibility px-2" style={{ 
             color: '#FFFFFF'
           }}>
             The <span className="neon-highlight-secondary">PREMIUM</span> Collector's Item for <span className="neon-highlight-primary">True GTA Fans</span>
           </h3>
 
           {/* Action Buttons */}
-          <div className="space-y-4 max-w-md mx-auto">
+          <div className="space-y-4 w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto px-2">
             {/* Frosted Glass Card */}
             <div className="frosted-glass-card">
             {!isSubmitted ? (
               <>
                 {/* Email Input Form */}
-                <form onSubmit={handleEmailSubmit} className="space-y-3">
+                <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-4">
                   <input
                     type="text"
                     value={firstName}
@@ -230,7 +230,7 @@ function App() {
                     placeholder="Enter your first name"
                     required
                     autoComplete="given-name"
-                    className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
+                    className="retro-input w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
                   />
                   <input
                     type="email"
@@ -239,20 +239,20 @@ function App() {
                     placeholder="Enter your email address"
                     required
                     autoComplete="email"
-                    className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
+                    className="retro-input w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
                   />
                 
                   {/* Secure Button */}
                   <button
                   onClick={handleSecureSubmit}
                   disabled={isSubmitting || !email.trim() || !firstName.trim()}
-                  className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-4 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 button-glow enhanced-text-visibility heartbeat-animation text-sm md:text-base lg:text-lg font-bold"
+                  className="retro-button w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 sm:gap-3 button-glow enhanced-text-visibility heartbeat-animation text-sm sm:text-base lg:text-lg font-bold min-h-[48px] touch-manipulation"
                   >
                   {isSubmitting ? (
-                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   ) : (
                     <>
-                      CLAIM YOUR CLOCK NOW →
+                      <span className="text-center">CLAIM YOUR CLOCK NOW →</span>
                     </>
                   )}
                   </button>
@@ -263,11 +263,11 @@ function App() {
                   <div className={`backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
                     retryCount > 0 ? 'bg-yellow-500/30 border-yellow-400/40' : 'bg-red-500/30 border-red-400/40'
                   }`}>
-                    <p className="text-sm text-white enhanced-text-visibility">
+                    <p className="text-sm sm:text-base text-white enhanced-text-visibility">
                       {submitError}
                     </p>
                     {retryCount > 0 && (
-                      <p className="text-xs text-white/80 mt-1">
+                      <p className="text-xs sm:text-sm text-white/80 mt-1">
                         Automatically retrying connection...
                       </p>
                     )}
@@ -275,10 +275,10 @@ function App() {
                 )}
               </>
             ) : (
-              <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-6 text-center">
-                <Check className="w-8 h-8 text-green-400 mx-auto mb-3" />
-                <h3 className="text-lg md:text-xl font-bold text-white mb-2 enhanced-text-visibility leading-tight">You're In!</h3>
-                <p className="text-sm md:text-base text-white enhanced-text-visibility leading-relaxed">
+              <div className="bg-green-500/30 backdrop-blur-sm border border-green-400/40 rounded-lg p-4 sm:p-6 text-center">
+                <Check className="w-6 h-6 sm:w-8 sm:h-8 text-green-400 mx-auto mb-2 sm:mb-3" />
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 enhanced-text-visibility leading-tight">You're In!</h3>
+                <p className="text-sm sm:text-base text-white enhanced-text-visibility leading-relaxed">
                   Welcome to the exclusive pre-order list. We'll notify you when the GTA VI Countdown Clock becomes available.
                 </p>
               </div>
@@ -287,13 +287,13 @@ function App() {
           </div>
 
           {/* Bottom Text */}
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-sm md:text-base lg:text-lg text-white enhanced-text-visibility leading-relaxed">
+          <div className="text-center w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto px-2">
+            <p className="text-sm sm:text-base md:text-lg text-white enhanced-text-visibility leading-relaxed mb-3 sm:mb-4">
               Be among the <span className="neon-highlight-primary">FIRST 300 FANS</span> to secure your <span className="neon-highlight-secondary">EXCLUSIVE GTA VI</span> collector's countdown clock. Reserve your <span className="underline decoration-white">piece of gaming history</span> now!
             </p>
             
             {/* Scarcity Reminder */}
-            <p className="text-base md:text-lg lg:text-xl font-bold enhanced-text-visibility mt-3 mb-5 leading-snug text-white">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold enhanced-text-visibility mt-3 sm:mt-4 mb-4 sm:mb-5 leading-snug text-white">
               <span className="neon-highlight-warning">LIMITED AVAILABILITY</span> – just <span className="font-pixel digit-glow pixel-perfect" style={{ 
                 color: '#FF0000',
                 imageRendering: 'pixelated',
@@ -303,7 +303,7 @@ function App() {
             
             {/* Trust Indicators */}
             <div className="text-center">
-              <p className="text-xs md:text-sm text-white enhanced-text-visibility leading-normal opacity-90">
+              <p className="text-xs sm:text-sm text-white enhanced-text-visibility leading-normal opacity-90">
                 Premium Quality • Limited Edition • Worldwide Shipping • Satisfaction Guaranteed
               </p>
             </div>
