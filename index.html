@@ -2,20 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://connect.mailerlite.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://connect.mailerlite.com">
+    
+    <!-- Critical resource hints -->
+    <link rel="preload" href="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.webp" as="image" type="image/webp">
+    <link rel="preload" href="/posters_background/poster1-optimized.webp" as="image" type="image/webp">
+    
     <meta name="description" content="Secure your exclusive GTA VI Countdown Clock collectible. Limited pre-orders available. Premium collector's item for the most anticipated game release." />
     <meta name="keywords" content="GTA VI, Grand Theft Auto 6, countdown clock, collectible, pre-order, limited edition" />
     <meta property="og:title" content="GTA VI Countdown Clock - Exclusive Pre-Order" />
     <meta property="og:description" content="Be among the first 300 to secure your premium GTA VI countdown clock collectible." />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.webp" />
+    
     <title>GTA VI Countdown Clock - Exclusive Pre-Order</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=Lato:wght@400;700&family=Roboto:wght@400;500;700&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Optimized font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=Lato:wght@400;700&family=Roboto:wght@400;500;700&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&family=Lato:wght@400;700&family=Roboto:wght@400;500;700&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Performance monitoring -->
+    <script>
+      // Critical performance metrics
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          console.log('Page Load Time:', perfData.loadEventEnd - perfData.navigationStart, 'ms');
+        }, 0);
+      });
+    </script>
   </body>
 </html>

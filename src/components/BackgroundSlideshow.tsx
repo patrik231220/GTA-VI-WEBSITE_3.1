@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import OptimizedImage from './OptimizedImage';
 
 interface BackgroundSlideshowProps {
   children: React.ReactNode;
@@ -10,8 +11,8 @@ const BackgroundSlideshow: React.FC<BackgroundSlideshowProps> = ({ children }) =
   
   // Array of background images
   const backgroundImages = [
-    '/posters_background/poster1.jpg',
-    '/posters_background/poster2.jpg'
+    '/posters_background/poster1-optimized.jpg',
+    '/posters_background/poster2-optimized.jpg'
   ];
 
   useEffect(() => {
@@ -61,12 +62,19 @@ const BackgroundSlideshow: React.FC<BackgroundSlideshowProps> = ({ children }) =
             index === currentImageIndex ? 'active' : ''
           }`}
           style={{
-            backgroundImage: `url(${image})`,
             transform: isMobile 
               ? 'none' 
               : `translate(${mousePosition.x * 20}px, ${mousePosition.y * 15}px) scale(1.1)`,
           }}
-        />
+        >
+          <OptimizedImage
+            src={image}
+            alt={`GTA VI Background ${index + 1}`}
+            priority={index === 0}
+            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
       ))}
       
       {/* Gradient Overlay */}
