@@ -639,30 +639,6 @@ input.retro-input:focus {
 }
 
 /* Responsive text scaling */
-@media (max-width: 480px) {
-  .digit-glow {
-    text-shadow: 
-      0 0 2px #CC0000,
-      0 0 4px #CC0000,
-      0 0 6px #AA0000,
-      0 0 8px #880000;
-  }
-  
-  .neon-highlight-primary,
-  .neon-highlight-secondary,
-  .neon-highlight-accent,
-  .neon-highlight-gold,
-  .neon-highlight-urgent,
-  .neon-highlight-scarcity,
-  .neon-highlight-warning,
-  .neon-highlight-countdown {
-    text-shadow: 
-      0 0 2px currentColor,
-      0 0 4px currentColor,
-      1px 1px 2px rgba(0, 0, 0, 0.8);
-  }
-}
-
 @media (max-width: 640px) {
   .digit-glow {
     text-shadow: 
@@ -673,133 +649,14 @@ input.retro-input:focus {
   }
 }
 
-/* Mobile-first responsive improvements */
-@media (max-width: 768px) {
-  /* Ensure minimum touch target sizes */
-  .retro-button,
-  .retro-input,
-  .audio-control {
-    min-height: 48px;
-    min-width: 48px;
-  }
-  
-  /* Improve text readability on mobile */
-  .enhanced-text-visibility {
-    text-shadow: 
-      1px 1px 2px rgba(0, 0, 0, 0.9),
-      0 0 4px rgba(0, 0, 0, 0.8),
-      0 0 8px rgba(0, 0, 0, 0.6);
-  }
-  
-  /* Optimize countdown for mobile */
-  .countdown-digit {
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Mobile-optimized frosted glass */
-  .frosted-glass-card {
-    padding: 1.5rem;
-    margin: 0 0.5rem;
-  }
-  
-  /* Improve button touch targets */
-  .retro-button {
-    padding: 12px 16px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  
-  /* Mobile input optimization */
-  .retro-input {
-    font-size: 16px; /* Prevents zoom on iOS */
-    padding: 12px 16px;
-  }
-}
-
-/* Extra small mobile devices */
-@media (max-width: 375px) {
-  .frosted-glass-card {
-    padding: 1rem;
-    margin: 0 0.25rem;
-  }
-  
-  .countdown-digit {
-    min-height: 50px;
-    padding: 8px;
-  }
-  
-  .retro-button {
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-  
-  .retro-input {
-    padding: 10px 12px;
-    font-size: 16px;
-  }
-}
-
-/* Large mobile devices and small tablets */
-@media (min-width: 481px) and (max-width: 768px) {
-  .countdown-digit {
-    min-height: 70px;
-  }
-  
-  .frosted-glass-card {
-    padding: 2rem;
-  }
-  
-  .retro-button {
-    padding: 14px 20px;
-    font-size: 15px;
-  }
-}
-
 /* Focus styles for accessibility */
 input:focus {
   outline: none;
-  border-width: 2px;
 }
 
 button:focus {
   outline: 2px solid rgba(236, 72, 153, 0.5);
   outline-offset: 2px;
-}
-
-/* Touch-friendly hover states for mobile */
-@media (hover: none) and (pointer: coarse) {
-  .retro-button:hover {
-    transform: none;
-    box-shadow: 
-      0 5px 15px rgba(255, 60, 172, 0.3),
-      0 0 20px rgba(255, 60, 172, 0.2);
-  }
-  
-  .countdown-digit:hover {
-    transform: none;
-  }
-  
-  .logo-container:hover {
-    transform: none;
-  }
-  
-  .frosted-glass-card:hover {
-    transform: none;
-  }
-}
-
-/* Active states for better mobile feedback */
-.retro-button:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease;
-}
-
-.countdown-digit:active {
-  transform: scale(0.95);
-  transition: transform 0.1s ease;
 }
 
 /* Background Slideshow Styles */
@@ -839,7 +696,6 @@ button:focus {
   .slideshow-image {
     transition: opacity 2s ease-in-out;
     will-change: opacity;
-    background-attachment: scroll; /* Better mobile performance */
   }
 }
 
@@ -861,16 +717,9 @@ button:focus {
     rgba(59, 130, 246, 0.24) 100%
   );
   /* Additional dark overlay for better text contrast */
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.45);
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.35);
   z-index: 2;
   pointer-events: none;
-}
-
-/* Mobile-specific overlay for better readability */
-@media (max-width: 768px) {
-  .slideshow-overlay {
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.55);
-  }
 }
 
 .slideshow-content {
@@ -904,31 +753,12 @@ button:focus {
   font-weight: 600; /* Semi-bold */
 }
 
-/* Mobile text enhancement */
-@media (max-width: 768px) {
-  .enhanced-text-visibility {
-    text-shadow: 
-      2px 2px 4px rgba(0, 0, 0, 0.9),
-      1px 1px 2px rgba(0, 0, 0, 0.95),
-      0 0 6px rgba(0, 0, 0, 0.8);
-    font-weight: 700; /* Bold for mobile */
-  }
-}
-
 .enhanced-text-backdrop {
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
   border-radius: 12px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Mobile backdrop enhancement */
-@media (max-width: 768px) {
-  .enhanced-text-backdrop {
-    background: rgba(0, 0, 0, 0.45);
-    padding: 1rem;
-  }
 }
 
 /* Frosted Glass Card */
@@ -945,19 +775,6 @@ button:focus {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-}
-
-/* Mobile frosted glass optimization */
-@media (max-width: 768px) {
-  .frosted-glass-card {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-width: 2px;
-    box-shadow: 
-      0 6px 24px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
 }
 
 /* Neon Border Pulse Animation */
@@ -1005,22 +822,6 @@ button:focus {
   }
 }
 
-/* Mobile heartbeat optimization */
-@media (max-width: 768px) {
-  .heartbeat-animation {
-    animation: heartbeat 6s ease-in-out infinite;
-  }
-  
-  @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.01);
-    }
-  }
-}
-
 /* Accessibility: Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .frosted-glass-card::before,
@@ -1030,12 +831,6 @@ button:focus {
   
   .frosted-glass-card:hover::before {
     opacity: 0.4;
-  }
-  
-  .retro-button:hover,
-  .countdown-digit:hover,
-  .logo-container:hover {
-    transform: none;
   }
 }
 /* CRT Scan-line Effect */
@@ -1057,38 +852,10 @@ button:focus {
   will-change: auto;
 }
 
-/* Reduce scanlines on mobile for better performance */
-@media (max-width: 768px) {
-  .crt-scanlines {
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 4px,
-      rgba(0, 0, 0, 0.03) 4px,
-      rgba(0, 0, 0, 0.03) 8px
-    );
-  }
-}
-
 /* Performance optimizations */
 .countdown-digit {
   contain: layout style paint;
   will-change: transform;
-}
-
-/* Mobile performance optimizations */
-@media (max-width: 768px) {
-  .countdown-digit {
-    will-change: auto;
-  }
-  
-  .retro-button {
-    will-change: auto;
-  }
-  
-  .frosted-glass-card {
-    will-change: auto;
-  }
 }
 
 .retro-button {
@@ -1121,42 +888,4 @@ button:focus {
 .slideshow-image {
   content-visibility: auto;
   contain-intrinsic-size: 100vw 100vh;
-}
-
-/* Touch manipulation for better mobile performance */
-.retro-button,
-.countdown-digit,
-.audio-control {
-  touch-action: manipulation;
-}
-
-/* Prevent text selection on interactive elements */
-.retro-button,
-.countdown-digit,
-.audio-control {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Smooth scrolling for mobile */
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Prevent horizontal scroll on mobile */
-body {
-  overflow-x: hidden;
-}
-
-/* Safe area insets for notched devices */
-@supports (padding: max(0px)) {
-  .slideshow-content {
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
-    padding-top: max(32px, env(safe-area-inset-top));
-    padding-bottom: max(32px, env(safe-area-inset-bottom));
-  }
 }

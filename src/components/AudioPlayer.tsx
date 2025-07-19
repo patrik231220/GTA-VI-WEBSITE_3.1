@@ -156,18 +156,18 @@ const AudioPlayer: React.FC = () => {
       <button
         onClick={toggleMute}
         onMouseDown={handleUserInteraction} // Trigger user interaction for autoplay
-        className={`audio-control fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-2 sm:p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg min-w-[48px] min-h-[48px] flex items-center justify-center touch-manipulation ${hasError ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`audio-control fixed bottom-6 left-6 z-50 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg ${hasError ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
         disabled={hasError}
       >
         {isLoading ? (
-          <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
         ) : hasError ? (
-          <VolumeX className="w-5 h-5 sm:w-6 sm:h-6 opacity-50" />
+          <VolumeX className="w-6 h-6 opacity-50" />
         ) : isMuted ? (
-          <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" />
+          <VolumeX className="w-6 h-6" />
         ) : (
-          <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />
+          <Volume2 className="w-6 h-6" />
         )}
       </button>
 
