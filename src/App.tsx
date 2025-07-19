@@ -30,6 +30,8 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 3;
 
   // Calculate time until Tuesday, May 26 at 12:00 AM GMT+2
   useEffect(() => {
@@ -91,12 +93,19 @@ function App() {
     setIsSubmitting(false);
   };
 
-  const handleSecureSubmit = async () => {
+  const handleSecureSubmit = async (isRetry = false) => {
+    if (!isRetry) {
+      setRetryCount(0);
+    }
+    
     setIsSubmitting(true);
     setSubmitError(null);
     
     try {
-      // MailerLite API endpoint for adding subscribers
+      // Enhanced fetch with timeout and retry logic
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
       const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
         method: 'POST',
         headers: {
@@ -104,6 +113,7 @@ function App() {
           'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMzFkOWI5ZjZkZmQ5ZjU5MmZiMTAxYmFmNGE3NTc0NWEzOWU5NGQwNDY2MGQxYzgxNTRjN2Y3ZTEwNmEyZTg5YmJhMTQxZDY3MTRlZjI2OTYiLCJpYXQiOjE3NTI3OTY5MTQuODgzMTA2LCJuYmYiOjE3NTI3OTY5MTQuODgzMTA4LCJleHAiOjQ5MDg0NzA1MTQuODc5NzQ5LCJzdWIiOiIxNjgyNDgxIiwic2NvcGVzIjpbXX0.xLQBeuHVAaUCA-8W5-LBN-_0VegmwyrKyM6dLyHVpR3xau_g8ojsQswEhplOs1dOlK0fjsMArEOUvRwH7vtyP9plJ5QfxD8_8B1Kd441c-gV_VcR56n1hwQDp7cz5XWE9vvKALNh2iqsE-gHb7RvKEy64vmUecyBlBJBylAfqq6PUxamgLhmvrU5nvmCr-VssoeaSiPiqKvPUyUo3p_vC_zRONXg3qVviLrsMm_rEPvB6blC5xc0Zr6U6vcRoBHHrMMjj6UxJOLDhKMECukGBvM9mHXZR41ywwOWM02P2EGFCiinmD28ekoK8MUmL9y7pzUMR525NoOg6apC2jhdlzhapHenq0CfIWxoGrFkDZXAGJQhROwUbCRI6Pd3WDPehmE28Ok1fC15EUyRNG3A5YxtNaoSI7G-NVo6lga2Pit6vqh99Ueyhza_SfMkLeNw6WApYaMdKW0dqsiIcQvXBWsQW4xKKBQUGzqNwHPzfxJHrq4h9kPfoprqvIehnhbUZVOpdn6GdCKEWacGTndCxNIAFwoxqXWs7rJOmZ-XpC_sPZbw61EtOb14KL0iNVPHL9wFeuLnBVZMBxyiK8h0oYd9YulkC81dAE9JnhVS6LiG9g69HrgVaMMgcjwgCN35aiGwww337XXFkwMeqnMwE0FaIzBmSmosAkUdte3xIjM',
           'Accept': 'application/json'
         },
+        signal: controller.signal,
         body: JSON.stringify({
           email: email.trim(),
           fields: {
@@ -113,6 +123,8 @@ function App() {
           status: 'active'
         })
       });
+      
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -123,9 +135,20 @@ function App() {
       console.log('MailerLite submission successful:', result);
       
       setIsSubmitted(true);
+      setRetryCount(0);
     } catch (error) {
       console.error('Form submission error:', error);
-      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
+      
+      // Implement retry logic for network errors
+      if ((error instanceof Error && (error.name === 'AbortError' || error.message.includes('fetch'))) && retryCount < maxRetries) {
+        setRetryCount(prev => prev + 1);
+        setTimeout(() => {
+          handleSecureSubmit(true);
+        }, 1000 * (retryCount + 1)); // Exponential backoff
+        setSubmitError(`Connection issue. Retrying... (${retryCount + 1}/${maxRetries})`);
+      } else {
+        setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -146,6 +169,8 @@ function App() {
               src="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.png"
               alt="Grand Theft Auto VI Logo"
               className="max-h-[20vh] w-auto object-contain"
+              loading="eager"
+              decoding="async"
             />
           </div>
 
@@ -204,6 +229,7 @@ function App() {
                     onChange={(e) => setFirstName(e.target.value)}
                     placeholder="Enter your first name"
                     required
+                    autoComplete="given-name"
                     className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
                   />
                   <input
@@ -212,6 +238,7 @@ function App() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     required
+                    autoComplete="email"
                     className="retro-input w-full px-6 py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm md:text-base enhanced-text-visibility"
                   />
                 
@@ -233,10 +260,17 @@ function App() {
                 
                 {/* Error Message */}
                 {submitError && (
-                  <div className="bg-red-500/30 backdrop-blur-sm border border-red-400/40 rounded-lg p-4 text-center mt-3">
+                  <div className={`backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
+                    retryCount > 0 ? 'bg-yellow-500/30 border-yellow-400/40' : 'bg-red-500/30 border-red-400/40'
+                  }`}>
                     <p className="text-sm text-white enhanced-text-visibility">
                       {submitError}
                     </p>
+                    {retryCount > 0 && (
+                      <p className="text-xs text-white/80 mt-1">
+                        Automatically retrying connection...
+                      </p>
+                    )}
                   </div>
                 )}
               </>

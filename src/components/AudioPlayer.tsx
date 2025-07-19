@@ -6,6 +6,8 @@ const AudioPlayer: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   // Audio playlist - Tom Petty first, then randomized
   const playlist = [
@@ -36,19 +38,37 @@ const AudioPlayer: React.FC = () => {
 
     // Set initial volume to 10%
     audio.volume = 0.1;
+    
+    // Add error handling
+    const handleError = () => {
+      setHasError(true);
+      setIsLoading(false);
+      console.warn('Audio failed to load:', randomizedPlaylist[currentTrackIndex]);
+    };
+    
+    const handleCanPlay = () => {
+      setIsLoading(false);
+      setHasError(false);
+    };
 
-    // Auto-play the first track
+    // Auto-play the first track with error handling
     const playAudio = async () => {
       try {
+        setIsLoading(true);
         await audio.play();
         setIsPlaying(true);
+        setIsLoading(false);
       } catch (error) {
         console.log('Autoplay prevented by browser:', error);
+        setIsLoading(false);
         // Autoplay was prevented, user will need to interact first
       }
     };
 
-    playAudio();
+    // Only attempt autoplay if audio source is available
+    if (randomizedPlaylist[currentTrackIndex]) {
+      playAudio();
+    }
 
     // Handle track end - play next track
     const handleTrackEnd = () => {
@@ -59,11 +79,15 @@ const AudioPlayer: React.FC = () => {
     audio.addEventListener('ended', handleTrackEnd);
     audio.addEventListener('play', () => setIsPlaying(true));
     audio.addEventListener('pause', () => setIsPlaying(false));
+    audio.addEventListener('error', handleError);
+    audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
       audio.removeEventListener('ended', handleTrackEnd);
       audio.removeEventListener('play', () => setIsPlaying(true));
       audio.removeEventListener('pause', () => setIsPlaying(false));
+      audio.removeEventListener('error', handleError);
+      audio.removeEventListener('canplay', handleCanPlay);
     };
   }, [currentTrackIndex, randomizedPlaylist]);
 
@@ -72,16 +96,22 @@ const AudioPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
+    setIsLoading(true);
+    setHasError(false);
     audio.src = randomizedPlaylist[currentTrackIndex];
     
-    if (isPlaying) {
-      audio.play().catch(console.error);
+    if (isPlaying && !hasError) {
+      audio.play().catch((error) => {
+        console.error('Failed to play audio:', error);
+        setHasError(true);
+        setIsLoading(false);
+      });
     }
-  }, [currentTrackIndex, randomizedPlaylist, isPlaying]);
+  }, [currentTrackIndex, randomizedPlaylist, isPlaying, hasError]);
 
   const toggleMute = () => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || hasError) return;
 
     if (isMuted) {
       audio.volume = 0.1;
@@ -95,16 +125,24 @@ const AudioPlayer: React.FC = () => {
   // Handle user interaction to start audio (for browsers that block autoplay)
   const handleUserInteraction = async () => {
     const audio = audioRef.current;
-    if (!audio || isPlaying) return;
+    if (!audio || isPlaying || hasError) return;
 
     try {
+      setIsLoading(true);
       await audio.play();
       setIsPlaying(true);
+      setIsLoading(false);
     } catch (error) {
       console.error('Failed to play audio:', error);
+      setHasError(true);
+      setIsLoading(false);
     }
   };
 
+  // Don't render if there's a critical error
+  if (hasError && !randomizedPlaylist.length) {
+    return null;
+  }
   return (
     <>
       {/* Hidden audio element */}
@@ -118,10 +156,15 @@ const AudioPlayer: React.FC = () => {
       <button
         onClick={toggleMute}
         onMouseDown={handleUserInteraction} // Trigger user interaction for autoplay
-        className="audio-control fixed bottom-6 left-6 z-50 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg"
+        className={`audio-control fixed bottom-6 left-6 z-50 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg ${hasError ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+        disabled={hasError}
       >
-        {isMuted ? (
+        {isLoading ? (
+          <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+        ) : hasError ? (
+          <VolumeX className="w-6 h-6 opacity-50" />
+        ) : isMuted ? (
           <VolumeX className="w-6 h-6" />
         ) : (
           <Volume2 className="w-6 h-6" />

@@ -7,37 +7,47 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* GTA VI Typography Hierarchy */
 .font-chivo-black {
   font-family: 'Chivo', sans-serif;
   font-weight: 900;
+  font-display: swap;
 }
 
 .font-chivo-bold {
   font-family: 'Chivo', sans-serif;
   font-weight: 700;
+  font-display: swap;
 }
 
 .font-lato {
   font-family: 'Lato', sans-serif;
+  font-display: swap;
 }
 
 .font-roboto {
   font-family: 'Roboto', sans-serif;
+  font-display: swap;
 }
 
 .font-helvetica {
   font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-display: swap;
 }
 
 .font-orbitron {
   font-family: 'Orbitron', monospace;
+  font-display: swap;
 }
 
 .font-pixel {
   font-family: 'Press Start 2P', monospace;
+  font-display: swap;
 }
 
 /* GTA VI Text Styles */
@@ -654,6 +664,7 @@ button:focus {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  contain: layout style paint;
 }
 
 .slideshow-image {
@@ -667,13 +678,16 @@ button:focus {
   background-repeat: no-repeat;
   opacity: 0;
   z-index: 1;
+  will-change: opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Desktop parallax transitions */
 @media (min-width: 769px) {
   .slideshow-image {
     transition: opacity 2s ease-in-out, transform 0.1s ease-out;
-    will-change: transform;
+    will-change: transform, opacity;
   }
 }
 
@@ -681,6 +695,7 @@ button:focus {
 @media (max-width: 768px) {
   .slideshow-image {
     transition: opacity 2s ease-in-out;
+    will-change: opacity;
   }
 }
 
@@ -704,6 +719,7 @@ button:focus {
   /* Additional dark overlay for better text contrast */
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.35);
   z-index: 2;
+  pointer-events: none;
 }
 
 .slideshow-content {
@@ -711,6 +727,7 @@ button:focus {
   z-index: 3;
   width: 100%;
   height: 100%;
+  contain: layout style;
 }
 
 /* Responsive adjustments for slideshow */
@@ -832,4 +849,43 @@ button:focus {
   );
   pointer-events: none;
   z-index: 10;
+  will-change: auto;
+}
+
+/* Performance optimizations */
+.countdown-digit {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+.retro-button {
+  contain: layout style;
+  will-change: transform;
+}
+
+.frosted-glass-card {
+  contain: layout style;
+  will-change: transform;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .slideshow-image {
+    will-change: auto;
+  }
+}
+
+/* Critical resource hints */
+.slideshow-image {
+  content-visibility: auto;
+  contain-intrinsic-size: 100vw 100vh;
 }
