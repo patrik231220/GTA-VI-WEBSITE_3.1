@@ -162,13 +162,13 @@ function App() {
     <BackgroundSlideshow>
       <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12">
         {/* Main Content */}
-        <div className="text-center w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-2">
+        <div className="text-center w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-5xl mx-auto space-y-6 sm:space-y-8">
           {/* Main Headline - Replace with Logo */}
-          <div className="flex items-center justify-center logo-container mb-3 sm:mb-4 md:mb-6 w-full">
+          <div className="flex items-center justify-center logo-container mb-4 sm:mb-6">
             <img 
               src="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.png"
               alt="Grand Theft Auto VI Logo"
-              className="max-h-[12vh] max-w-[90vw] sm:max-h-[15vh] sm:max-w-[85vw] md:max-h-[18vh] lg:max-h-[20vh] w-auto object-contain"
+              className="max-h-[15vh] sm:max-h-[18vh] md:max-h-[20vh] w-auto object-contain"
               loading="eager"
               decoding="async"
             />
@@ -227,19 +227,19 @@ function App() {
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="First name"
+                    placeholder="Enter your first name"
                     required
                     autoComplete="given-name"
-                    className="retro-input sliding-placeholder w-full px-3 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
+                    className="retro-input w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
                   />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email address"
+                    placeholder="Enter your email address"
                     required
                     autoComplete="email"
-                    className="retro-input sliding-placeholder w-full px-3 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
+                    className="retro-input w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-white/70 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-400/30 transition-all duration-300 text-center text-sm sm:text-base enhanced-text-visibility min-h-[48px]"
                   />
                 
                   {/* Secure Button */}
