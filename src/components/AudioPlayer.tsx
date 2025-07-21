@@ -74,7 +74,6 @@ const AudioPlayer: React.FC = () => {
     // Delay autoplay attempt to ensure audio element is ready
     const autoplayTimer = setTimeout(() => {
       if (randomizedPlaylist[currentTrackIndex]) {
-        console.log(`Initial autoplay attempt for track ${currentTrackIndex}`);
         playAudio();
       }
     }, 1000);
@@ -104,20 +103,33 @@ const AudioPlayer: React.FC = () => {
   // Update audio source when track changes
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !randomizedPlaylist[currentTrackIndex]) return;
 
+    console.log(`Loading track ${currentTrackIndex}: ${randomizedPlaylist[currentTrackIndex]}`);
     setIsLoading(true);
     setHasError(false);
-    audio.src = randomizedPlaylist[currentTrackIndex];
     
-    if (isPlaying && !hasError) {
-      audio.play().catch((error) => {
+    // Force reload the audio element with new source
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = randomizedPlaylist[currentTrackIndex];
+    audio.load(); // Important: reload the audio element
+    
+    // Auto-play the new track
+    const playNewTrack = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+        setIsLoading(false);
+      } catch (error) {
         console.error('Failed to play audio:', error);
         setHasError(true);
         setIsLoading(false);
-      });
-    }
-  }, [currentTrackIndex, randomizedPlaylist, isPlaying, hasError]);
+      }
+    };
+
+    playNewTrack();
+  }, [currentTrackIndex, randomizedPlaylist]);
 
   const toggleMute = () => {
     const audio = audioRef.current;
