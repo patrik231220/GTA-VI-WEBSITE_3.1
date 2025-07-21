@@ -137,6 +137,7 @@ const AudioPlayer: React.FC = () => {
     return () => {
       audio.removeEventListener('canplaythrough', handleCanPlayThrough);
     };
+  }, [currentTrackIndex, randomizedPlaylist]);
 
   const toggleMute = () => {
     const audio = audioRef.current;
