@@ -74,6 +74,7 @@ const AudioPlayer: React.FC = () => {
     // Delay autoplay attempt to ensure audio element is ready
     const autoplayTimer = setTimeout(() => {
       if (randomizedPlaylist[currentTrackIndex]) {
+        console.log(`Initial autoplay attempt for track ${currentTrackIndex}`);
         playAudio();
       }
     }, 1000);
