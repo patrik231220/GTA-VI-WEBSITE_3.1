@@ -115,8 +115,8 @@ const AudioPlayer: React.FC = () => {
     audio.src = randomizedPlaylist[currentTrackIndex];
     audio.load(); // Important: reload the audio element
     
-    // Auto-play the new track
-    const playNewTrack = async () => {
+    // Wait for audio to be ready before playing
+    const handleCanPlayThrough = async () => {
       try {
         await audio.play();
         setIsPlaying(true);
@@ -126,10 +126,17 @@ const AudioPlayer: React.FC = () => {
         setHasError(true);
         setIsLoading(false);
       }
+      // Remove the event listener after use
+      audio.removeEventListener('canplaythrough', handleCanPlayThrough);
     };
 
-    playNewTrack();
-  }, [currentTrackIndex, randomizedPlaylist]);
+    // Add event listener for when audio is ready to play
+    audio.addEventListener('canplaythrough', handleCanPlayThrough);
+
+    // Cleanup function to remove event listener if component unmounts or track changes
+    return () => {
+      audio.removeEventListener('canplaythrough', handleCanPlayThrough);
+    };
 
   const toggleMute = () => {
     const audio = audioRef.current;
