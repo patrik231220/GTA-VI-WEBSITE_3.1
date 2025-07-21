@@ -106,7 +106,7 @@ function App() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
       
-      const response = await fetch("/.netlify/functions/subscribe", {
+      const response = await fetch("https://nmckdwkyjnkwnhbxsesv.supabase.co/functions/v1/super-service", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
