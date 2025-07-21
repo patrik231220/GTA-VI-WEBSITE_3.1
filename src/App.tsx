@@ -102,25 +102,19 @@ function App() {
     setSubmitError(null);
     
     try {
-      // Enhanced fetch with timeout and retry logic
+      // Call our secure Netlify Function instead of MailerLite directly
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
       
-      const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
+      const response = await fetch("/.netlify/functions/subscribe", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMzFkOWI5ZjZkZmQ5ZjU5MmZiMTAxYmFmNGE3NTc0NWEzOWU5NGQwNDY2MGQxYzgxNTRjN2Y3ZTEwNmEyZTg5YmJhMTQxZDY3MTRlZjI2OTYiLCJpYXQiOjE3NTI3OTY5MTQuODgzMTA2LCJuYmYiOjE3NTI3OTY5MTQuODgzMTA4LCJleHAiOjQ5MDg0NzA1MTQuODc5NzQ5LCJzdWIiOiIxNjgyNDgxIiwic2NvcGVzIjpbXX0.xLQBeuHVAaUCA-8W5-LBN-_0VegmwyrKyM6dLyHVpR3xau_g8ojsQswEhplOs1dOlK0fjsMArEOUvRwH7vtyP9plJ5QfxD8_8B1Kd441c-gV_VcR56n1hwQDp7cz5XWE9vvKALNh2iqsE-gHb7RvKEy64vmUecyBlBJBylAfqq6PUxamgLhmvrU5nvmCr-VssoeaSiPiqKvPUyUo3p_vC_zRONXg3qVviLrsMm_rEPvB6blC5xc0Zr6U6vcRoBHHrMMjj6UxJOLDhKMECukGBvM9mHXZR41ywwOWM02P2EGFCiinmD28ekoK8MUmL9y7pzUMR525NoOg6apC2jhdlzhapHenq0CfIWxoGrFkDZXAGJQhROwUbCRI6Pd3WDPehmE28Ok1fC15EUyRNG3A5YxtNaoSI7G-NVo6lga2Pit6vqh99Ueyhza_SfMkLeNw6WApYaMdKW0dqsiIcQvXBWsQW4xKKBQUGzqNwHPzfxJHrq4h9kPfoprqvIehnhbUZVOpdn6GdCKEWacGTndCxNIAFwoxqXWs7rJOmZ-XpC_sPZbw61EtOb14KL0iNVPHL9wFeuLnBVZMBxyiK8h0oYd9YulkC81dAE9JnhVS6LiG9g69HrgVaMMgcjwgCN35aiGwww337XXFkwMeqnMwE0FaIzBmSmosAkUdte3xIjM',
-          'Accept': 'application/json'
         },
         signal: controller.signal,
         body: JSON.stringify({
           email: email.trim(),
-          fields: {
-            name: firstName.trim()
-          },
-          groups: ["160072846854325674"], // Add group IDs if you want to assign to specific groups
-          status: 'active'
+          firstName: firstName.trim()
         })
       });
       
@@ -128,11 +122,11 @@ function App() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
       }
 
       const result = await response.json();
-      console.log('MailerLite submission successful:', result);
+      console.log('Subscription successful:', result);
       
       setIsSubmitted(true);
       setRetryCount(0);
