@@ -848,7 +848,7 @@ button:focus {
     rgba(0, 0, 0, 0.05) 6px
   );
   pointer-events: none;
-  z-index: 10;
+  z-index: 5;
   will-change: auto;
 }
 
@@ -866,6 +866,18 @@ button:focus {
 .frosted-glass-card {
   contain: layout style;
   will-change: transform;
+}
+
+/* Audio Control Button - Ensure it's clickable */
+.audio-control {
+  position: fixed !important;
+  z-index: 9999 !important;
+  pointer-events: all !important;
+  cursor: pointer !important;
+}
+
+.audio-control:disabled {
+  cursor: not-allowed !important;
 }
 
 /* Reduce motion for users who prefer it */

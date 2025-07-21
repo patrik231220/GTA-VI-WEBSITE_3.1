@@ -124,10 +124,10 @@ const BackgroundSlideshow: React.FC<BackgroundSlideshowProps> = ({ children }) =
       ))}
       
       {/* Gradient Overlay */}
-      <div className="slideshow-overlay" />
+      <div className="slideshow-overlay" style={{ pointerEvents: 'none' }} />
       
       {/* CRT Scan-lines */}
-      <div className="crt-scanlines" />
+      <div className="crt-scanlines" style={{ pointerEvents: 'none' }} />
       
       {/* Content */}
       <div className="slideshow-content">
