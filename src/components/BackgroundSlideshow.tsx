@@ -12,8 +12,8 @@ const BackgroundSlideshow: React.FC<BackgroundSlideshowProps> = ({ children }) =
   
   // Array of background images
   const backgroundImages = [
-    '/posters_background/poster1.jpg',
-    '/posters_background/poster2.jpg'
+    '/images/poster1.jpg',
+    '/images/poster2.jpg'
   ];
 
   // Detect mobile device once on mount
