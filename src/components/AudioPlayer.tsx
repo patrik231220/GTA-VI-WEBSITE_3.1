@@ -11,11 +11,11 @@ const AudioPlayer: React.FC = () => {
 
   // Audio playlist - Tom Petty first, then randomized
   const playlist = [
-    '/AUDIO/Tom Petty - Love Is A Long Road (Official Audio).mp3',
-    '/AUDIO/Wang Chung - Everybody Have Fun Tonight (Official Music Video).mp3',
-    '/AUDIO/Stardust - Music Sounds Better With You (Official Music Video).mp3',
-    '/AUDIO/The Pointer Sisters - Hot Together (GTA VI Trailer)(Lyrics).mp3',
-    '/AUDIO/Laura Branigan - Self Control (Official Music Video).mp3'
+    '/audio/Tom Petty - Love Is A Long Road (Official Audio).mp3',
+    '/audio/Wang Chung - Everybody Have Fun Tonight (Official Music Video).mp3',
+    '/audio/Stardust - Music Sounds Better With You (Official Music Video).mp3',
+    '/audio/The Pointer Sisters - Hot Together (GTA VI Trailer)(Lyrics).mp3',
+    '/audio/Laura Branigan - Self Control (Official Music Video).mp3'
   ];
 
   // Randomize playlist except for the first track
@@ -36,14 +36,20 @@ const AudioPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Set initial volume to 10%
-    audio.volume = 0.1;
+    // Set initial volume to 15% for better audibility
+    audio.volume = 0.15;
     
     // Add error handling
     const handleError = () => {
       setHasError(true);
       setIsLoading(false);
       console.warn('Audio failed to load:', randomizedPlaylist[currentTrackIndex]);
+      // Try next track if current one fails
+      setTimeout(() => {
+        const nextIndex = (currentTrackIndex + 1) % randomizedPlaylist.length;
+        setCurrentTrackIndex(nextIndex);
+        setHasError(false);
+      }, 2000);
     };
     
     const handleCanPlay = () => {
@@ -51,7 +57,7 @@ const AudioPlayer: React.FC = () => {
       setHasError(false);
     };
 
-    // Auto-play the first track with error handling
+    // Auto-play with better error handling
     const playAudio = async () => {
       try {
         setIsLoading(true);
@@ -59,16 +65,18 @@ const AudioPlayer: React.FC = () => {
         setIsPlaying(true);
         setIsLoading(false);
       } catch (error) {
-        console.log('Autoplay prevented by browser:', error);
+        console.log('Autoplay prevented by browser or audio failed:', error);
         setIsLoading(false);
-        // Autoplay was prevented, user will need to interact first
+        setHasError(false); // Don't mark as error for autoplay prevention
       }
     };
 
-    // Only attempt autoplay if audio source is available
-    if (randomizedPlaylist[currentTrackIndex]) {
-      playAudio();
-    }
+    // Delay autoplay attempt to ensure audio element is ready
+    const autoplayTimer = setTimeout(() => {
+      if (randomizedPlaylist[currentTrackIndex]) {
+        playAudio();
+      }
+    }, 1000);
 
     // Handle track end - play next track
     const handleTrackEnd = () => {
@@ -83,6 +91,7 @@ const AudioPlayer: React.FC = () => {
     audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
+      clearTimeout(autoplayTimer);
       audio.removeEventListener('ended', handleTrackEnd);
       audio.removeEventListener('play', () => setIsPlaying(true));
       audio.removeEventListener('pause', () => setIsPlaying(false));
@@ -111,10 +120,21 @@ const AudioPlayer: React.FC = () => {
 
   const toggleMute = () => {
     const audio = audioRef.current;
-    if (!audio || hasError) return;
+    if (!audio) return;
 
+    // If there's an error, try to reload and play
+    if (hasError) {
+      setHasError(false);
+      setIsLoading(true);
+      audio.load();
+      audio.play().catch(() => {
+        setHasError(true);
+        setIsLoading(false);
+      });
+      return;
+    }
     if (isMuted) {
-      audio.volume = 0.1;
+      audio.volume = 0.15;
       setIsMuted(false);
     } else {
       audio.volume = 0;
@@ -125,7 +145,14 @@ const AudioPlayer: React.FC = () => {
   // Handle user interaction to start audio (for browsers that block autoplay)
   const handleUserInteraction = async () => {
     const audio = audioRef.current;
-    if (!audio || isPlaying || hasError) return;
+    if (!audio || isPlaying) return;
+
+    // If there's an error, try to reload
+    if (hasError) {
+      setHasError(false);
+      setIsLoading(true);
+      audio.load();
+    }
 
     try {
       setIsLoading(true);
@@ -148,28 +175,29 @@ const AudioPlayer: React.FC = () => {
       {/* Hidden audio element */}
       <audio
         ref={audioRef}
-        preload="auto"
+        preload="metadata"
         loop={false}
+        crossOrigin="anonymous"
       />
       
       {/* Mute/Unmute Toggle Button */}
       <button
         onClick={toggleMute}
         onMouseDown={handleUserInteraction} // Trigger user interaction for autoplay
-        className={`audio-control fixed bottom-6 left-6 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg ${hasError ? 'opacity-50' : ''}`}
+        className={`audio-control fixed bottom-6 left-6 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-black/80 transition-all duration-300 hover:scale-110 shadow-lg ${hasError ? 'opacity-75 hover:opacity-100' : ''}`}
         style={{
           zIndex: 9999,
           pointerEvents: 'all',
           position: 'fixed',
-          cursor: hasError ? 'not-allowed' : 'pointer'
+          cursor: 'pointer'
         }}
-        aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
-        disabled={hasError}
+        aria-label={hasError ? 'Retry audio' : isMuted ? 'Unmute audio' : 'Mute audio'}
+        title={hasError ? 'Click to retry audio' : isMuted ? 'Unmute audio' : 'Mute audio'}
       >
         {isLoading ? (
           <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
         ) : hasError ? (
-          <VolumeX className="w-6 h-6 opacity-50" />
+          <VolumeX className="w-6 h-6" />
         ) : isMuted ? (
           <VolumeX className="w-6 h-6" />
         ) : (
