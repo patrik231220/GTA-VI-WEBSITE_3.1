@@ -166,7 +166,7 @@ function App() {
           {/* Main Headline - Replace with Logo */}
           <div className="flex items-center justify-center logo-container">
             <img 
-              src="/TRANSPARENT_LOGO/GTA-6-Logo-PNG-from-Grand-Theft-Auto-VI-Transparent.png"
+              src="/images/gta-vi-logo.png"
               alt="Grand Theft Auto VI Logo"
               className="max-h-[20vh] w-auto object-contain"
               loading="eager"
