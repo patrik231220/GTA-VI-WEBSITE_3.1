@@ -150,7 +150,7 @@ function App() {
             status: 'active',
           }),
         });
-      },
+      }
       
       // If both methods fail, simulate success to avoid user frustration
       if (!response || !response.ok) {
