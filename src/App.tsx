@@ -137,7 +137,6 @@ function App() {
         
         response = await fetch(`${corsProxy}${mailerliteUrl}`, {
           method: 'POST',
-         headers: {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
