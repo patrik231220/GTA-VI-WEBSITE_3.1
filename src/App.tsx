@@ -149,7 +149,7 @@ function App() {
             groups: ['160072846854325674'],
             status: 'active',
           }),
-        });
+        }),;
       }
       
       // If both methods fail, simulate success to avoid user frustration
