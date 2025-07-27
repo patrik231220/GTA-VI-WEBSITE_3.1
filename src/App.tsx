@@ -211,6 +211,15 @@ function App() {
       setSubmitError('Please fill in both fields');
       return;
     }
+      const handleSimpleSubmit = async (e: React.FormEvent) => {
+    // …your existing code…
+  };  // ← this line closes handleSimpleSubmit
+
+  // ←– Paste your secure submit handler here:
+  const handleSecureSubmit = methods.handleSubmit(async (values) => {
+    // …your new code…
+  });
+
     
     setIsSubmitting(true);
     setSubmitError(null);
