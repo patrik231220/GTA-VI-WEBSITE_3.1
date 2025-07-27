@@ -208,13 +208,39 @@ if (!isSupabaseSuccess) {
   };
 
   // Alternative simple submission handler
+  // -------------------------------
+  // SIMPLE FORM SUBMISSION HANDLER
+  // -------------------------------
   const handleSimpleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // basic validation
     if (!email.trim() || !firstName.trim()) {
       setSubmitError('Please fill in both fields');
       return;
     }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // ← put your API call or other logic here…
+      await new Promise((r) => setTimeout(r, 500)); // simulate network
+      setRetryCount(0);
+      setSubmitSuccess(true);
+    } catch (err) {
+      setSubmitError('Submission failed');
+      setRetryCount((c) => c + 1);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // -------------------------------
+  // POINT YOUR <form onSubmit> AT this
+  // -------------------------------
+  const handleSubmit = handleSimpleSubmit;
+
       const handleSimpleSubmit = async (e: React.FormEvent) => {
     // …your existing code…
   };  // ← this line closes handleSimpleSubmit
