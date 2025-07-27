@@ -132,26 +132,30 @@ function App() {
       }
       
       // If Supabase fails, try direct MailerLite API call with CORS proxy
-      if (!isSupabaseSuccess) {
-        const corsProxy = 'https://api.allorigins.win/raw?url=';
-        const mailerliteUrl = encodeURIComponent('https://connect.mailerlite.com/api/subscribers');
-        
-        response = await fetch(${corsProxy}${mailerliteUrl}, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email.trim(),
-            fields: {
-              name: firstName.trim(),
-            },
-            groups: ['160072846854325674'],
-            status: 'active',
-          }),
-        });
-      }
+if (!isSupabaseSuccess) {
+  const corsProxy = 'https://api.allorigins.win/raw?url=';
+  const mailerliteUrl = encodeURIComponent(
+    'https://connect.mailerlite.com/api/subscribers'
+  );
+
+  response = await fetch(
+    `${corsProxy}${mailerliteUrl}`, // <-- wrap in backticks!
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email.trim(),
+        fields: { name: firstName.trim() },
+        groups: ['160072846854325674'],
+        status: 'active',
+      }),
+    }
+  );
+}
+
       
       // If both methods fail, simulate success to avoid user frustration
       if (!response || !response.ok) {
