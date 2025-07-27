@@ -313,7 +313,7 @@ function App() {
             {!isSubmitted ? (
               <>
                 {/* Email Input Form */}
-                <form onSubmit={handleSecureSubmit} className="space-y-3">
+                + <form onSubmit={handleSubmit(handleSecureSubmit)} className="space-y-3">
                   <input
                     type="text"
                     value={firstName}
