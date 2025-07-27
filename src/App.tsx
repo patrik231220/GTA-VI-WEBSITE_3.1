@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import BackgroundSlideshow from './components/BackgroundSlideshow';
 import AudioPlayer from './components/AudioPlayer';
-import { signIn, getCsrfToken } from 'next-auth/react'
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({
@@ -132,30 +131,26 @@ function App() {
       }
       
       // If Supabase fails, try direct MailerLite API call with CORS proxy
-if (!isSupabaseSuccess) {
-  const corsProxy = 'https://api.allorigins.win/raw?url=';
-  const mailerliteUrl = encodeURIComponent(
-    'https://connect.mailerlite.com/api/subscribers'
-  );
-
-  response = await fetch(
-    `${corsProxy}${mailerliteUrl}`, // <-- wrap in backticks!
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email.trim(),
-        fields: { name: firstName.trim() },
-        groups: ['160072846854325674'],
-        status: 'active',
-      }),
-    }
-  );
-}
-
+      if (!isSupabaseSuccess) {
+        const corsProxy = 'https://api.allorigins.win/raw?url=';
+        const mailerliteUrl = encodeURIComponent('https://connect.mailerlite.com/api/subscribers');
+        
+        response = await fetch(${corsProxy}${mailerliteUrl}, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            fields: {
+              name: firstName.trim(),
+            },
+            groups: ['160072846854325674'],
+            status: 'active',
+          }),
+        });
+      }
       
       // If both methods fail, simulate success to avoid user frustration
       if (!response || !response.ok) {
@@ -198,7 +193,7 @@ if (!isSupabaseSuccess) {
         setTimeout(() => {
           handleSecureSubmit(true);
         }, 1000 * (retryCount + 1)); // Exponential backoff
-        setSubmitError(`Connection issue. Retrying... (${retryCount + 1}/${maxRetries})`);
+        setSubmitError(Connection issue. Retrying... (${retryCount + 1}/${maxRetries}));
       } else {
         setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
       }
@@ -208,48 +203,13 @@ if (!isSupabaseSuccess) {
   };
 
   // Alternative simple submission handler
-  // -------------------------------
-  // SIMPLE FORM SUBMISSION HANDLER
-  // -------------------------------
   const handleSimpleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // basic validation
+    
     if (!email.trim() || !firstName.trim()) {
       setSubmitError('Please fill in both fields');
       return;
     }
-
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      // ← put your API call or other logic here…
-      await new Promise((r) => setTimeout(r, 500)); // simulate network
-      setRetryCount(0);
-      setSubmitSuccess(true);
-    } catch (err) {
-      setSubmitError('Submission failed');
-      setRetryCount((c) => c + 1);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // -------------------------------
-  // POINT YOUR <form onSubmit> AT this
-  // -------------------------------
-  const handleSubmit = handleSimpleSubmit;
-
-      const handleSimpleSubmit = async (e: React.FormEvent) => {
-    // …your existing code…
-  };  // ← this line closes handleSimpleSubmit
-
-  // ←– Paste your secure submit handler here:
-  const handleSecureSubmit = methods.handleSubmit(async (values) => {
-    // …your new code…
-  });
-
     
     setIsSubmitting(true);
     setSubmitError(null);
@@ -305,9 +265,7 @@ if (!isSupabaseSuccess) {
                 { value: timeLeft.seconds, label: 'SEC', vhs: vhsStates.seconds, vhsClass: 'vhs-seconds' }
               ].map((unit, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <div
-  className={`countdown-digit bg-black/60 backdrop-blur-sm rounded-lg p-4 md:p-6 mb-3 border border-red-500/40 shadow-2xl ${unit.vhs ? unit.vhsClass : ''}`}
->
+                  <div className={countdown-digit bg-black/60 backdrop-blur-sm rounded-lg p-4 md:p-6 mb-3 border border-red-500/40 shadow-2xl ${unit.vhs ? unit.vhsClass : ''}}>
                     <div className="text-2xl md:text-4xl lg:text-5xl font-pixel leading-none tracking-wider transform transition-all duration-300 hover:scale-105 digit-glow pixel-perfect" style={{ 
                       color: '#FF0000',
                       imageRendering: 'pixelated',
@@ -345,7 +303,7 @@ if (!isSupabaseSuccess) {
             {!isSubmitted ? (
               <>
                 {/* Email Input Form */}
-                + <form onSubmit={handleSubmit(handleSecureSubmit)} className="space-y-3">
+                <form onSubmit={handleSimpleSubmit} className="space-y-3">
                   <input
                     type="text"
                     value={firstName}
@@ -383,9 +341,9 @@ if (!isSupabaseSuccess) {
                 
                 {/* Error Message */}
                 {submitError && (
-                  <div className={`backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
+                  <div className={backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
                     retryCount > 0 ? 'bg-yellow-500/30 border-yellow-400/40' : 'bg-red-500/30 border-red-400/40'
-                  }`}>
+                  }}>
                     <p className="text-sm text-white enhanced-text-visibility">
                       {submitError}
                     </p>
