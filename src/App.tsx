@@ -193,7 +193,7 @@ function App() {
         setTimeout(() => {
           handleSecureSubmit(true);
         }, 1000 * (retryCount + 1)); // Exponential backoff
-        setSubmitError(Connection issue. Retrying... (${retryCount + 1}/${maxRetries}));
+        setSubmitError(`Connection issue. Retrying... (${retryCount + 1}/${maxRetries})`);
       } else {
         setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
       }
