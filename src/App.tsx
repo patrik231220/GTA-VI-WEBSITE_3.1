@@ -135,7 +135,7 @@ function App() {
         const corsProxy = 'https://api.allorigins.win/raw?url=';
         const mailerliteUrl = encodeURIComponent('https://connect.mailerlite.com/api/subscribers');
         
-        response = await fetch(${corsProxy}${mailerliteUrl}, {
+        response = await fetch(${`corsProxy}${mailerliteUrl}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
