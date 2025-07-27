@@ -341,9 +341,9 @@ function App() {
                 
                 {/* Error Message */}
                 {submitError && (
-                  <div className={backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
+                  <div className={`backdrop-blur-sm border rounded-lg p-4 text-center mt-3 ${
                     retryCount > 0 ? 'bg-yellow-500/30 border-yellow-400/40' : 'bg-red-500/30 border-red-400/40'
-                  }}>
+                  }`}>
                     <p className="text-sm text-white enhanced-text-visibility">
                       {submitError}
                     </p>
